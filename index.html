@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+    <title>AI Image Enhancer & Generator Pro</title>
+    <meta name="description" content="Professional AI image enhancement and generation tool with advanced features for perfect results">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="theme-switch">
+        <input type="checkbox" id="theme-toggle">
+        <label for="theme-toggle" class="theme-label">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+        </label>
+    </div>
+
+    <div class="container">
+        <div class="watermark">Created By BRIJRAJSINH JADAV</div>
+        <header class="main-header">
+            <h1>AI Image Enhancer & Generator Pro</h1>
+            <p class="subtitle">Transform and generate stunning images with advanced AI technology</p>
+        </header>
+
+        <div class="tab-container">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="enhance">
+                    <i class="fas fa-wand-magic-sparkles"></i>
+                    Enhance Image
+                </button>
+                <button class="tab-btn" data-tab="generate">
+                    <i class="fas fa-paintbrush"></i>
+                    Generate Image
+                </button>
+            </div>
+
+            <div class="tab-content">
+                <!-- Enhance Image Tab -->
+                <div class="tab-pane active" id="enhance-tab">
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <i class="fas fa-expand"></i>
+                            <h3>Super Resolution</h3>
+                            <p>Upscale images while maintaining quality</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-palette"></i>
+                            <h3>Color Enhancement</h3>
+                            <p>Optimize and balance color profiles</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-magic"></i>
+                            <h3>Smart Retouching</h3>
+                            <p>Remove imperfections automatically</p>
+                        </div>
+                        <div class="feature-card">
+                            <i class="fas fa-sliders-h"></i>
+                            <h3>Custom Controls</h3>
+                            <p>Fine-tune enhancement parameters</p>
+                        </div>
+                    </div>
+
+                    <div id="editorContainer" class="editor-section glass-effect">
+                        <div id="dropZone" class="upload-area">
+                            <div class="upload-content">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <h3>Upload Image</h3>
+                                <p>Drag & drop your image here or click to browse</p>
+                                <input type="file" id="fileInput" accept="image/*" class="file-input">
+                            </div>
+                        </div>
+
+                        <div class="preview-container" style="display: none;">
+                            <div class="preview-section">
+                                <h3>Original</h3>
+                                <div class="image-preview">
+                                    <img id="originalImage" src="#" alt="Original Image">
+                                </div>
+                            </div>
+                            
+                            <div class="preview-divider">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                            
+                            <div class="preview-section">
+                                <h3>Enhanced</h3>
+                                <div class="image-preview">
+                                    <img id="enhancedImage" src="#" alt="Enhanced Image">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="controls-container" style="display: none;">
+                            <div class="controls-grid">
+                                <div class="control-group">
+                                    <label for="resolution">Resolution Enhancement</label>
+                                    <input type="range" id="resolution" min="1" max="4" step="1" value="2">
+                                    <span class="value-display">2x</span>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="sharpness">Sharpness</label>
+                                    <input type="range" id="sharpness" min="0" max="100" value="50">
+                                    <span class="value-display">50%</span>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="denoise">Noise Reduction</label>
+                                    <input type="range" id="denoise" min="0" max="100" value="50">
+                                    <span class="value-display">50%</span>
+                                </div>
+                                
+                                <div class="control-group">
+                                    <label for="brightness">Brightness</label>
+                                    <input type="range" id="brightness" min="-100" max="100" value="0">
+                                    <span class="value-display">0%</span>
+                                </div>
+                            </div>
+
+                            <div class="action-buttons">
+                                <button id="resetButton" class="btn btn-secondary">
+                                    <i class="fas fa-undo"></i>
+                                    Reset
+                                </button>
+                                <div class="button-group">
+                                    <button class="btn-auto-enhance" id="autoEnhanceBtn">
+                                        <i class="fas fa-wand-magic-sparkles"></i>
+                                        AI Auto-Enhance
+                                        <div class="btn-spinner"></div>
+                                    </button>
+                                    <button class="btn-enhance" id="enhanceBtn">
+                                        <i class="fas fa-magic"></i>
+                                        Manual Enhance
+                                        <div class="btn-spinner"></div>
+                                    </button>
+                                    <button class="btn-download" id="downloadBtn">
+                                        <i class="fas fa-download"></i>
+                                        Download
+                                        <div class="btn-spinner"></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generate Image Tab -->
+                <div class="tab-pane" id="generate-tab">
+                    <div class="prompt-container glass-effect">
+                        <div class="prompt-input">
+                            <textarea id="promptInput" placeholder="Describe the image you want to generate..."></textarea>
+                            <button id="generateButton" class="btn btn-primary">
+                                <i class="fas fa-paintbrush"></i>
+                                Generate
+                            </button>
+                        </div>
+
+                        <div class="generation-settings">
+                            <div class="setting-group">
+                                <label for="style">Art Style</label>
+                                <select id="style">
+                                    <option value="realistic">Realistic</option>
+                                    <option value="artistic">Artistic</option>
+                                    <option value="cartoon">Cartoon</option>
+                                    <option value="anime">Anime</option>
+                                </select>
+                            </div>
+                            
+                            <div class="setting-group">
+                                <label for="size">Image Size</label>
+                                <select id="size">
+                                    <option value="512x512">512x512</option>
+                                    <option value="768x768">768x768</option>
+                                    <option value="1024x1024">1024x1024</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="generation-result" style="display: none;">
+                            <h3>Generated Image</h3>
+                            <div class="result-preview">
+                                <img id="generatedImage" src="#" alt="Generated Image">
+                            </div>
+                            <button id="downloadGenerated" class="btn btn-success">
+                                <i class="fas fa-download"></i>
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chatbot Container -->
+        <div class="chatbot-container">
+            <button id="chatbot-toggle" class="chatbot-toggle">
+                <i class="fas fa-robot"></i>
+            </button>
+            
+            <div id="chatbot-box" class="chatbot-box hidden">
+                <div class="chatbot-header">
+                    <div class="header-content">
+                        <i class="fas fa-robot"></i>
+                        <div>
+                            <h3>AI Assistant</h3>
+                            <small>Created by Brijrajsinh Jadav</small>
+                        </div>
+                    </div>
+                    <button id="close-chat" class="close-btn">
+                        <div class="close-icon"></div>
+                    </button>
+                </div>
+                
+                <div id="chat-messages" class="chat-messages">
+                    <!-- Messages will be added here dynamically -->
+                </div>
+                
+                <div class="chat-input">
+                    <input type="text" id="user-input" placeholder="Ask me anything..." autocomplete="off">
+                    <button id="send-message">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
